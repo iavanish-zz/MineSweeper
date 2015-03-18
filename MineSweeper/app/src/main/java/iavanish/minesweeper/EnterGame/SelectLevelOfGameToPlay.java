@@ -1,24 +1,25 @@
-package iavanish.minesweeper;
+package iavanish.minesweeper.EnterGame;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import iavanish.minesweeper.R;
 
-public class EnterGame extends ActionBarActivity {
+public class SelectLevelOfGameToPlay extends ActionBarActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_enter_game);
+        setContentView(R.layout.activity_select_level_of_game_to_play);
     }
 
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_enter_game, menu);
+        getMenuInflater().inflate(R.menu.menu_select_level_of_game_to_play, menu);
         return true;
     }
 
