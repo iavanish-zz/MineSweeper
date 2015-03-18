@@ -3,7 +3,7 @@ package iavanish.minesweeper.PlayGame;
 
 
 /**
- * Utility class
+ * Initialize Game
  */
 
 /**
@@ -11,19 +11,13 @@ package iavanish.minesweeper.PlayGame;
  */
 
 
-public class Game {
+public class StartNewGame {
 
-    String[] grid;
-    String[] invisibleGrid;
-    int n;
+    public StartNewGame() {
 
-    public Game(String[] grid, String[] invisibleGrid, int n) {
-        this.grid = grid;
-        this.invisibleGrid = invisibleGrid;
-        this.n = n;
     }
 
-    public void initializeGrid() {
+    public void initializeGrid(String[] grid, String[] invisibleGrid, int n) {
 
         for(int i = 0; i < n; i++) {
             grid[i] = "$";
@@ -32,7 +26,7 @@ public class Game {
 
     }
 
-    public void initializeInvisibleGrid(int noOfMines) {
+    public void initializeInvisibleGrid(String[] grid, String[] invisibleGrid, int n, int noOfMines) {
 
         for(int i = 0; i < noOfMines; i++) {
             int x = (int)Math.random();

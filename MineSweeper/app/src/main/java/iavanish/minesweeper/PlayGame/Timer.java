@@ -1,7 +1,20 @@
+
 package iavanish.minesweeper.PlayGame;
 
+
 /**
- * Created by iavanish on 18-Mar-15.
+ * The count-down timer
  */
+
+/**
+ * Created by iavanish on 3/18/2015.
+ */
+
+
 public class Timer {
+
+    public Timer() {
+
+    }
+
 }

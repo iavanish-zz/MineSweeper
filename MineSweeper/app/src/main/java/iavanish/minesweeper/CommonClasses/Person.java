@@ -1,7 +1,24 @@
+
 package iavanish.minesweeper.CommonClasses;
 
+import iavanish.minesweeper.PlayGame.Score;
+
+
 /**
- * Created by iavanish on 18-Mar-15.
+ * Interface to be implemented by Player Class
  */
+
+/**
+ * Created by iavanish on 3/18/2015.
+ */
+
+
 public interface Person {
+
+    public String nameOfPlayer = null;
+
+    public Score scoreOfPlayer = null;
+
+    public Level levelOfPlayer = Level.LEVEL_1;
+
 }

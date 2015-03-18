@@ -1,7 +1,20 @@
+
 package iavanish.minesweeper.PlayGame;
 
+
 /**
- * Created by iavanish on 18-Mar-15.
+ * Content of a cell of the grid: Mine/Flag/Nothing
  */
+
+/**
+ * Created by iavanish on 3/18/2015.
+ */
+
+
 public enum ContentOfCell {
-}
+
+    MINE,
+    FLAG,
+    NOTHING
+
+};

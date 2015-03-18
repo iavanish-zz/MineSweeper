@@ -1,7 +1,15 @@
+
 package iavanish.minesweeper.PlayGame;
 
+
 /**
- * Created by iavanish on 18-Mar-15.
+ * Cell of the grid
  */
+
+/**
+ * Created by iavanish on 3/18/2015.
+ */
+
+
 public enum StatusOfCell {
 }

@@ -8,13 +8,37 @@
         android:label="@string/app_name"
         android:theme="@style/AppTheme" >
         <activity
-            android:name=".EnterGame"
+            android:name=".EnterGame.EnterGame"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".EnterGame.ChooseExistingPlayerToStartTheGame"
+            android:label="@string/title_activity_choose_existing_player_to_start_the_game" >
+        </activity>
+        <activity
+            android:name=".EnterGame.EnterNewPlayerToStartTheGame"
+            android:label="@string/title_activity_enter_new_player_to_start_the_game" >
+        </activity>
+        <activity
+            android:name=".EnterGame.ChangeSettings"
+            android:label="@string/title_activity_change_settings" >
+        </activity>
+        <activity
+            android:name=".EnterGame.SelectLevelOfGameToPlay"
+            android:label="@string/title_activity_select_level_of_game_to_play" >
+        </activity>
+        <activity
+            android:name=".PlayGame.Level1Game"
+            android:label="@string/title_activity_level1_game" >
+        </activity>
+        <activity
+            android:name=".PlayGame.Level2Game"
+            android:label="@string/title_activity_level2_game" >
         </activity>
     </application>
 

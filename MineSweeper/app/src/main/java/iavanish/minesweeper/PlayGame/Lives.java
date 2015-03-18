@@ -1,7 +1,24 @@
+
 package iavanish.minesweeper.PlayGame;
 
+
 /**
- * Created by iavanish on 18-Mar-15.
+ * Whether the user has gained power source or not
  */
+
+/**
+ * Created by iavanish on 3/18/2015.
+ */
+
+
 public class Lives {
+
+    public int countLives;
+
+    public Lives(int countLives) {
+
+        this.countLives = countLives;
+
+    }
+
 }
