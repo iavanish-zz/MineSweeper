@@ -3,7 +3,7 @@ package iavanish.minesweeper.PlayGame;
 
 
 /**
- * Cell of the grid
+ * Status of a cell of the grid: Covered or Un-covered
  */
 
 /**
@@ -12,4 +12,8 @@ package iavanish.minesweeper.PlayGame;
 
 
 public enum StatusOfCell {
-}
+
+    COVERED,
+    UNCOVERED
+
+};

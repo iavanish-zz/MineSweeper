@@ -40,6 +40,10 @@
             android:name=".PlayGame.Level2Game"
             android:label="@string/title_activity_level2_game" >
         </activity>
+        <activity
+            android:name=".PlayGame.MineSweeperGame"
+            android:label="@string/title_activity_mine_sweeper_game" >
+        </activity>
     </application>
 
 </manifest>

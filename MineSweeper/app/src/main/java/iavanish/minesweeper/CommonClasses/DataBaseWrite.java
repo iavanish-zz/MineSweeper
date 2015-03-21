@@ -2,8 +2,6 @@
 package iavanish.minesweeper.CommonClasses;
 
 
-import iavanish.minesweeper.PlayGame.Score;
-
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
@@ -64,18 +62,16 @@ public class DataBaseWrite extends DataBaseRead {
 
     }
 
-    public void updateScore(Player player, Score score, int threshold) {
-
-        String userName = player.nameOfPlayer;
+    public void updateScore(String userName, int score, int threshold) {
 
         String[] whereClauseArgument = new String[1];
         whereClauseArgument[0] = userName;
 
         ContentValues values = new ContentValues();
         values.put("Name", userName);
-        values.put("Score", score.score);
+        values.put("Score", score);
 
-        if(score.score < threshold) {
+        if(score < threshold) {
             values.put("Level", 1);
         }
         else {

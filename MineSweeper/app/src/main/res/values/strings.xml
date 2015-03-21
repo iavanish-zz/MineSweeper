@@ -47,5 +47,6 @@
     <string name="hello_world">Hello world!</string>
     <string name="title_activity_level2_game">Level2Game</string>
     <string name="title_activity_game">Game</string>
+    <string name="title_activity_mine_sweeper_game">MineSweeperGame</string>
 
 </resources>
