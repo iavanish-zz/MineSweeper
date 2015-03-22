@@ -1,26 +1,40 @@
-
 package iavanish.minesweeper.EnterGame;
 
+import android.support.v7.app.ActionBarActivity;
+import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
 
-/**
- * Used when the user wants to see the current ScoreBoard
- */
+import iavanish.minesweeper.R;
 
-/**
- * Created by iavanish on 3/18/2015.
- */
+public class ShowHighScores extends ActionBarActivity {
 
-
-public class ShowHighScores {
-
-    //  private DataBaseRead dataBaseRead = new DataBaseRead();
-
-    public ShowHighScores() {
-
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_show_high_scores);
     }
 
-    private void showHighScores() {
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_show_high_scores, menu);
+        return true;
     }
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.action_settings) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 }
