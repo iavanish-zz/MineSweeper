@@ -24,8 +24,10 @@ public class EndGame {
     }
 
     protected void enterNewGame(Activity currentActivity) {
+
         Intent intent = new Intent(currentActivity, EnterGame.class);
         currentActivity.startActivity(intent);
+
     }
 
 }

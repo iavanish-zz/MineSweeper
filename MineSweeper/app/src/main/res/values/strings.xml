@@ -22,6 +22,9 @@
     <string name = "player5"> Player5 </string>
 
     <string name = "highScores"> High Scores </string>
+    <string name = "PlayerName"> Player Name </string>
+    <string name = "Score"> Score </string>
+    <string name = "LevelReached"> Level Reached </string>
 
     <string name = "selectLevel"> Select Level </string>
     <string name = "level1"> Level 1 </string>

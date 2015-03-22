@@ -6,7 +6,10 @@ import iavanish.minesweeper.CommonClasses.Player;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TableLayout;
+import android.widget.TableRow;
 import android.widget.TextView;
 
 import iavanish.minesweeper.CommonClasses.DataBaseRead;
@@ -26,7 +29,7 @@ import java.util.*;
 
 public class ShowHighScores extends Activity {
 
-    private LinearLayout showHighScores;
+    private TableLayout tableLayout;
 
     private DataBaseRead dataBaseRead;
 
@@ -36,7 +39,7 @@ public class ShowHighScores extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_high_scores);
 
-        showHighScores = (LinearLayout) findViewById(R.id.showHighScores);
+        tableLayout = (TableLayout) findViewById(R.id.tableLayout);
         dataBaseRead = new DataBaseRead(this);
         displayHighScores();
 
@@ -47,16 +50,26 @@ public class ShowHighScores extends Activity {
         ArrayList <Player> existingPlayers = dataBaseRead.getPlayersFromDataBase();
         Iterator <Player> iterator = existingPlayers.iterator();
 
-        TextView heading = new TextView(this);
-        heading.setText("Name" + "\t" + "Score" + "\t" + "Level");
-        showHighScores.addView(heading);
+        TableRow tableRow;
+        Button name;
+        Button score;
+        Button level;
 
         while(iterator.hasNext()) {
             Player player = iterator.next();
-            TextView displayPlayer = new TextView(this);
-            String data = player.nameOfPlayer + "\t" + player.scoreOfPlayer + "\t" + player.levelOfPlayer;
-            displayPlayer.setText(data);
-            showHighScores.addView(displayPlayer);
+
+            tableRow = new TableRow(this);
+            name = new Button(this);
+            score = new Button(this);
+            level = new Button(this);
+            name.setText(player.nameOfPlayer);
+            score.setText(String.valueOf(player.scoreOfPlayer.score));
+            level.setText(String.valueOf(player.levelOfPlayer.ordinal()));
+            tableRow.addView(name);
+            tableRow.addView(score);
+            tableRow.addView(level);
+            tableLayout.addView(tableRow);
+
         }
 
     }

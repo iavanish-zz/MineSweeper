@@ -2,16 +2,24 @@
 package iavanish.minesweeper.PlayGame;
 
 
+import java.util.*;
+
+import android.media.AudioManager;
+
 import android.app.Activity;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View.OnClickListener;
 import android.view.View;
 import android.widget.Button;
 import android.content.Intent;
 import android.widget.TableLayout;
 import android.widget.TableRow;
+import android.widget.Toast;
 
 import iavanish.minesweeper.EndGame.Win;
+import iavanish.minesweeper.EndGame.Loss;
 
 import iavanish.minesweeper.R;
 
@@ -28,7 +36,10 @@ import iavanish.minesweeper.R;
 public class Level1Game extends Activity implements OnClickListener {
 
     private String playerName;
-    private Score score;
+
+    private Button scoreTracker;
+    private Button start;
+    private Button timer;
 
     private TableLayout tableLayout;
     private TableRow[] tableRows;
@@ -42,17 +53,64 @@ public class Level1Game extends Activity implements OnClickListener {
 
     private Grid grid;
     private Lives lives;
+    private Score score;
 
     private StartNewGame newGame;
     private Game game;
 
+    long startTime = 0;
+
+    Handler timerHandler = new Handler();
+    Runnable timerRunnable = new Runnable() {
+
+        @Override
+        public void run() {
+            long millis = System.currentTimeMillis() - startTime;
+            int seconds = (int) (millis / 1000);
+
+            timer.setText(String.format("%02d", seconds));
+
+            score.score = seconds;
+
+            if(seconds > 60) {
+
+                Level1Game leaveGame = new Level1Game();
+                Toast.makeText(leaveGame, "TIME OVER. YOU LOST", Toast.LENGTH_LONG).show();
+
+                for (int i = 0; i < 2000000; i++) {
+                    Math.random();  //  wait
+                }
+
+                Loss loss = new Loss();
+                loss.enterNewGame(leaveGame);
+
+            }
+
+            timerHandler.postDelayed(this, 500);
+        }
+
+    };
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_level1_game);
 
+        MediaPlayer mMediaPlayer;
+        mMediaPlayer = MediaPlayer.create(this, R.mipmap.gun);
+        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mMediaPlayer.setLooping(true);
+        mMediaPlayer.start();
+
         Intent intent = getIntent();
         playerName = intent.getStringExtra("name");
+
+        scoreTracker = (Button) findViewById(R.id.scoreTracker);
+        start = (Button) findViewById(R.id.start);
+        timer = (Button) findViewById(R.id.timer);
+
+        start.setOnClickListener(this);
 
         tableLayout = (TableLayout) findViewById(R.id.tableLayout);
         tableRows = new TableRow[noOfRows];
@@ -62,7 +120,7 @@ public class Level1Game extends Activity implements OnClickListener {
 
         grid = new Grid(noOfRows*noOfColumns, 0);
         lives = new Lives(1);
-        score = new Score(100);
+        score = new Score(0);
 
         newGame = new StartNewGame(this, tableLayout, tableRows, cells, contentOfCells, statusOfCells, grid, noOfRows, noOfColumns, noOfMines, lives);
         newGame.initializeGame();
@@ -75,28 +133,45 @@ public class Level1Game extends Activity implements OnClickListener {
 
         game = new Game();
 
+        startTime = System.currentTimeMillis();
+        timerHandler.postDelayed(timerRunnable, 0);
+
     }
 
     @Override
     public void onClick(View v) {
 
-        int clickedCell = v.getId();
-        int row = clickedCell / noOfColumns;
-        int column = clickedCell % noOfColumns;
-
-        if(statusOfCells[row][column] == StatusOfCell.UNCOVERED) {
-
+        if (v.getId() == R.id.start) {
+            Intent intent = new Intent(this, Level1Game.class);
+            intent.putExtra("name", playerName);
+            startActivity(intent);
         }
 
         else {
+            int clickedCell = v.getId();
+            int row = clickedCell / noOfColumns;
+            int column = clickedCell % noOfColumns;
 
-            boolean gameOver = game.cellClickedEvent(this, cells, contentOfCells, statusOfCells,
-                    grid, noOfRows, noOfColumns, noOfMines, lives, row, column);
+            if (statusOfCells[row][column] == StatusOfCell.UNCOVERED) {
 
-            if(gameOver) {
-                Win win = new Win();
-                win.updateScore(this, playerName, score);
-                win.enterNewGame(this);
+            } else {
+
+                boolean gameOver = game.cellClickedEvent(this, cells, contentOfCells, statusOfCells,
+                        grid, noOfRows, noOfColumns, noOfMines, lives, row, column);
+
+                if (gameOver) {
+                    Toast.makeText(this, "YOU WON", Toast.LENGTH_LONG).show();
+
+                    for (int i = 0; i < 2000000; i++) {
+                        Math.random();  //  wait
+                    }
+
+
+                    Win win = new Win();
+                    win.updateScore(this, playerName, score);
+                    win.enterNewGame(this);
+                }
+
             }
 
         }

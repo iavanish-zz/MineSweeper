@@ -30,8 +30,8 @@ public class DataBaseRead {
         mineSweeper = activity.openOrCreateDatabase("MineSweeperDB", Context.MODE_PRIVATE, null);
         mineSweeper.execSQL("CREATE TABLE IF NOT EXISTS Player " +
                 "(Name VARCHAR PRIMARY KEY, " +
-                "Score INTEGER, " +
-                "Level INTEGER);");
+                "Score VARCHAR, " +
+                "Level VARCHAR);");
 
     }
 
@@ -72,8 +72,8 @@ public class DataBaseRead {
             resultSet.moveToFirst();
             do {
                 String name = resultSet.getString(0);
-                int intScore = resultSet.getInt(1);
-                int intLevel = resultSet.getInt(2);
+                int intScore = Integer.parseInt(resultSet.getString(1));
+                int intLevel = Integer.parseInt(resultSet.getString(2));
 
                 Level level = Level.LEVEL_1;
                 Score score = new Score(intScore);

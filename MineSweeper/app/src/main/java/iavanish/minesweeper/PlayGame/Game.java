@@ -2,8 +2,10 @@
 package iavanish.minesweeper.PlayGame;
 
 
+import android.os.Handler;
 import android.widget.Button;
 import android.app.Activity;
+import android.widget.Toast;
 
 import iavanish.minesweeper.EndGame.Loss;
 
@@ -27,7 +29,8 @@ public class Game {
                                     Grid grid, int noOfRows, int noOfColumns, int noOfMines, Lives lives, int row, int column) {
 
         if(statusOfCells[row][column] == StatusOfCell.UNCOVERED) {
-            return allCellsUncovered(grid, noOfMines);
+            return allCellsUncovered(currentActivity, cells, contentOfCells, statusOfCells, grid,
+                    noOfRows, noOfColumns, noOfMines, lives, row, column);
         }
 
         else {
@@ -45,7 +48,8 @@ public class Game {
                         noOfRows, noOfColumns, noOfMines, lives, row, column);
             }
             else {
-                return allCellsUncovered(grid, noOfMines);
+                return allCellsUncovered(currentActivity, cells, contentOfCells, statusOfCells, grid,
+                        noOfRows, noOfColumns, noOfMines, lives, row, column);
             }
 
         }
@@ -56,7 +60,8 @@ public class Game {
                                        Grid grid, int noOfRows, int noOfColumns, int noOfMines, Lives lives, int row, int column) {
 
         if(statusOfCells[row][column] == StatusOfCell.UNCOVERED) {
-            return allCellsUncovered(grid, noOfMines);
+            return allCellsUncovered(currentActivity, cells, contentOfCells, statusOfCells, grid,
+                    noOfRows, noOfColumns, noOfMines, lives, row, column);
         }
 
         statusOfCells[row][column] = StatusOfCell.UNCOVERED;
@@ -68,7 +73,8 @@ public class Game {
 
         cells[row][column].setText(String.valueOf(neighbours));
 
-        boolean gameOver = allCellsUncovered(grid, noOfMines);
+        boolean gameOver = allCellsUncovered(currentActivity, cells, contentOfCells, statusOfCells, grid,
+                noOfRows, noOfColumns, noOfMines, lives, row, column);
         if(gameOver) {
             return gameOver;
         }
@@ -141,7 +147,8 @@ public class Game {
 
         }
 
-        return allCellsUncovered(grid, noOfMines);
+        return allCellsUncovered(currentActivity, cells, contentOfCells, statusOfCells, grid,
+                noOfRows, noOfColumns, noOfMines, lives, row, column);
 
     }
 
@@ -156,12 +163,25 @@ public class Game {
         grid.noOfUncoveredCells++;
 
         if(lives.countLives == 0) {
+
+            Toast.makeText(currentActivity, "YOU LOST", Toast.LENGTH_LONG).show();
+
+            revealAllMines(currentActivity, cells, contentOfCells, statusOfCells, grid,
+                    noOfRows, noOfColumns, noOfMines, lives, row, column);
+
+            for(int i = 0; i < 2000000; i++) {
+                Math.random();  //  wait
+            }
+
             Loss loss = new Loss();
             loss.enterNewGame(currentActivity);
             return false;
+
         }
+
         else {
-            return allCellsUncovered(grid, noOfMines);
+            return allCellsUncovered(currentActivity, cells, contentOfCells, statusOfCells, grid,
+                    noOfRows, noOfColumns, noOfMines, lives, row, column);
         }
 
     }
@@ -176,17 +196,49 @@ public class Game {
         grid.noOfCoveredCells--;
         grid.noOfUncoveredCells++;
 
-        return allCellsUncovered(grid, noOfMines);
+        return allCellsUncovered(currentActivity, cells, contentOfCells, statusOfCells, grid,
+                noOfRows, noOfColumns, noOfMines, lives, row, column);
 
     }
 
-    public boolean allCellsUncovered(Grid grid, int noOfMines) {
+    public boolean allCellsUncovered(Activity currentActivity, Button[][] cells, ContentOfCell[][] contentOfCells, StatusOfCell[][] statusOfCells,
+                                     Grid grid, int noOfRows, int noOfColumns, int noOfMines, Lives lives, int row, int column) {
 
         if(grid.noOfCoveredCells <= noOfMines) {
+            revealAllMines(currentActivity, cells, contentOfCells, statusOfCells, grid,
+                    noOfRows, noOfColumns, noOfMines, lives, row, column);
             return true;
         }
         else {
             return false;
+        }
+
+    }
+
+    private void revealAllMines(Activity currentActivity, Button[][] cells, ContentOfCell[][] contentOfCells, StatusOfCell[][] statusOfCells,
+                                Grid grid, int noOfRows, int noOfColumns, int noOfMines, Lives lives, int row, int column) {
+
+        for(int i = 0; i < noOfRows; i++) {
+            for(int j = 0; j < noOfColumns; j++) {
+                if(statusOfCells[i][j] == StatusOfCell.COVERED) {
+                    statusOfCells[i][j] = StatusOfCell.UNCOVERED;
+                    if(contentOfCells[i][j] == ContentOfCell.FLAG) {
+                        cells[i][j].setText("F");
+                    }
+                    else if(contentOfCells[i][j] == ContentOfCell.MINE) {
+                        cells[i][j].setText("M");
+                    }
+                    else if(contentOfCells[i][j] == ContentOfCell.NOTHING) {
+                        cells[i][j].setText("N");
+                    }
+                    else {
+
+                    }
+                }
+                else {
+
+                }
+            }
         }
 
     }

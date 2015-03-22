@@ -28,8 +28,8 @@ public class DataBaseWrite extends DataBaseRead {
         mineSweeper = activity.openOrCreateDatabase("MineSweeperDB", Context.MODE_PRIVATE, null);
         mineSweeper.execSQL("CREATE TABLE IF NOT EXISTS Player " +
                             "(Name VARCHAR PRIMARY KEY, " +
-                            "Score INTEGER, " +
-                            "Level INTEGER);");
+                            "Score VARCHAR, " +
+                            "Level VARCHAR);");
 
     }
 

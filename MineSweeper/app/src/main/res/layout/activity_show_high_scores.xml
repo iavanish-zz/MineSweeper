@@ -31,6 +31,33 @@
             android:layout_gravity="center_horizontal"
             android:orientation="vertical" >
 
+            <TableLayout
+                android:id="@+id/tableLayout"
+                android:shrinkColumns="*"
+                android:layout_width="fill_parent"
+                android:layout_height="fill_parent" >
+
+                <TableRow>
+
+                    <Button
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/PlayerName" />
+
+                    <Button
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/Score" />
+
+                    <Button
+                        android:layout_gravity="center"
+                        android:layout_weight="1"
+                        android:text="@string/LevelReached"/>
+
+                </TableRow>
+
+            </TableLayout>
+
         </LinearLayout>
 
     </ScrollView>

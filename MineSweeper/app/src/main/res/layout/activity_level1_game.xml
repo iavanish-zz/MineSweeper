@@ -11,6 +11,26 @@
         android:layout_width="fill_parent"
         android:layout_height="fill_parent" >
 
+        <TableRow>
+
+            <Button
+                android:id="@+id/scoreTracker"
+                android:layout_gravity="center"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/start"
+                android:background="@mipmap/smiley"
+                android:layout_gravity="center"
+                android:layout_weight="1" />
+
+            <Button
+                android:id="@+id/timer"
+                android:layout_gravity="center"
+                android:layout_weight="1" />
+
+        </TableRow>
+
     </TableLayout>
 
 </LinearLayout>

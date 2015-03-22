@@ -41,10 +41,6 @@
             android:label="@string/title_activity_level2_game" >
         </activity>
         <activity
-            android:name=".PlayGame.MineSweeperGame"
-            android:label="@string/title_activity_mine_sweeper_game" >
-        </activity>
-        <activity
             android:name=".EnterGame.ShowHighScores"
             android:label="@string/title_activity_show_high_scores" >
         </activity>
