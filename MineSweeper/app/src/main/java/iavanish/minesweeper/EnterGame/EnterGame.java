@@ -67,7 +67,8 @@ public class EnterGame extends Activity implements OnClickListener {
         }
 
         else if(v.getId() == R.id.showHighScores) {
-
+            Intent intent = new Intent(this, ShowHighScores.class);
+            startActivity(intent);
         }
 
         else if(v.getId() == R.id.changeSettings) {

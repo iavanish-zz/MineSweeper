@@ -21,6 +21,8 @@
     <string name = "player4"> Player4 </string>
     <string name = "player5"> Player5 </string>
 
+    <string name = "highScores"> High Scores </string>
+
     <string name = "selectLevel"> Select Level </string>
     <string name = "level1"> Level 1 </string>
     <string name = "level2"> Level 2 </string>
@@ -48,5 +50,6 @@
     <string name="title_activity_level2_game">Level2Game</string>
     <string name="title_activity_game">Game</string>
     <string name="title_activity_mine_sweeper_game">MineSweeperGame</string>
+    <string name="title_activity_show_high_scores">ShowHighScores</string>
 
 </resources>

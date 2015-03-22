@@ -91,7 +91,7 @@ public class Level1Game extends Activity implements OnClickListener {
         else {
 
             boolean gameOver = game.cellClickedEvent(this, cells, contentOfCells, statusOfCells,
-                    grid, noOfRows, noOfColumns, lives, row, column);
+                    grid, noOfRows, noOfColumns, noOfMines, lives, row, column);
 
             if(gameOver) {
                 Win win = new Win();

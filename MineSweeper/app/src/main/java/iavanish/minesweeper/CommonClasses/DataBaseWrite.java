@@ -44,7 +44,7 @@ public class DataBaseWrite extends DataBaseRead {
         else {
             ContentValues values = new ContentValues();
             values.put("Name", userName);
-            values.put("Score", Integer.MAX_VALUE);
+            values.put("Score", 200);
             values.put("Level", 1);
 
             mineSweeper.insert("Player", null, values);

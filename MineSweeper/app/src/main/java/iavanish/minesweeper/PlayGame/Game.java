@@ -24,28 +24,28 @@ public class Game {
     }
 
     public boolean cellClickedEvent(Activity currentActivity, Button[][] cells, ContentOfCell[][] contentOfCells, StatusOfCell[][] statusOfCells,
-                                    Grid grid, int noOfRows, int noOfColumns, Lives lives, int row, int column) {
+                                    Grid grid, int noOfRows, int noOfColumns, int noOfMines, Lives lives, int row, int column) {
 
         if(statusOfCells[row][column] == StatusOfCell.UNCOVERED) {
-            return allCellsUncovered(grid);
+            return allCellsUncovered(grid, noOfMines);
         }
 
         else {
 
             if(contentOfCells[row][column] == ContentOfCell.NOTHING) {
                 return nonMineClickedEvent(currentActivity, cells, contentOfCells, statusOfCells, grid,
-                        noOfRows, noOfColumns,lives, row, column);
+                        noOfRows, noOfColumns, noOfMines, lives, row, column);
             }
             else if(contentOfCells[row][column] == ContentOfCell.MINE) {
                 return mineCellClickedEvent(currentActivity, cells, contentOfCells, statusOfCells, grid,
-                        noOfRows, noOfColumns,lives, row, column);
+                        noOfRows, noOfColumns, noOfMines, lives, row, column);
             }
             else if(contentOfCells[row][column] == ContentOfCell.FLAG) {
                 return flaggedCellClickedEvent(currentActivity, cells, contentOfCells, statusOfCells, grid,
-                        noOfRows, noOfColumns,lives, row, column);
+                        noOfRows, noOfColumns, noOfMines, lives, row, column);
             }
             else {
-                return allCellsUncovered(grid);
+                return allCellsUncovered(grid, noOfMines);
             }
 
         }
@@ -53,10 +53,10 @@ public class Game {
     }
 
     public boolean nonMineClickedEvent(Activity currentActivity, Button[][] cells, ContentOfCell[][] contentOfCells, StatusOfCell[][] statusOfCells,
-                                       Grid grid, int noOfRows, int noOfColumns, Lives lives, int row, int column) {
+                                       Grid grid, int noOfRows, int noOfColumns, int noOfMines, Lives lives, int row, int column) {
 
         if(statusOfCells[row][column] == StatusOfCell.UNCOVERED) {
-            return allCellsUncovered(grid);
+            return allCellsUncovered(grid, noOfMines);
         }
 
         statusOfCells[row][column] = StatusOfCell.UNCOVERED;
@@ -64,11 +64,11 @@ public class Game {
         grid.noOfUncoveredCells++;
 
         int neighbours = noOfNeighbouringMines(cells, contentOfCells, statusOfCells, grid,
-                noOfRows, noOfColumns,lives, row, column);
+                noOfRows, noOfColumns, noOfMines, lives, row, column);
 
         cells[row][column].setText(String.valueOf(neighbours));
 
-        boolean gameOver = allCellsUncovered(grid);
+        boolean gameOver = allCellsUncovered(grid, noOfMines);
         if(gameOver) {
             return gameOver;
         }
@@ -77,7 +77,7 @@ public class Game {
 
             if((row-1 >= 0) && (column - 1 >= 0)) {
                 gameOver = cellClickedEvent(currentActivity, cells, contentOfCells, statusOfCells, grid,
-                        noOfRows, noOfColumns,lives, row-1, column-1);
+                        noOfRows, noOfColumns, noOfMines, lives, row-1, column-1);
                 if(gameOver) {
                     return gameOver;
                 }
@@ -85,7 +85,7 @@ public class Game {
 
             if(row-1 >= 0) {
                 gameOver = cellClickedEvent(currentActivity, cells, contentOfCells, statusOfCells, grid,
-                        noOfRows, noOfColumns,lives, row-1, column);
+                        noOfRows, noOfColumns, noOfMines, lives, row-1, column);
                 if(gameOver) {
                     return gameOver;
                 }
@@ -93,7 +93,7 @@ public class Game {
 
             if((row-1 >= 0) && (column+1 < noOfColumns)) {
                 gameOver = cellClickedEvent(currentActivity, cells, contentOfCells, statusOfCells, grid,
-                        noOfRows, noOfColumns,lives, row-1, column+1);
+                        noOfRows, noOfColumns, noOfMines, lives, row-1, column+1);
                 if(gameOver) {
                     return gameOver;
                 }
@@ -101,7 +101,7 @@ public class Game {
 
             if(column-1 >= 0) {
                 gameOver = cellClickedEvent(currentActivity, cells, contentOfCells, statusOfCells, grid,
-                        noOfRows, noOfColumns,lives, row, column-1);
+                        noOfRows, noOfColumns, noOfMines, lives, row, column-1);
                 if(gameOver) {
                     return gameOver;
                 }
@@ -109,7 +109,7 @@ public class Game {
 
             if(column+1 < noOfColumns) {
                 gameOver = cellClickedEvent(currentActivity, cells, contentOfCells, statusOfCells, grid,
-                        noOfRows, noOfColumns,lives, row, column+1);
+                        noOfRows, noOfColumns, noOfMines, lives, row, column+1);
                 if(gameOver) {
                     return gameOver;
                 }
@@ -117,7 +117,7 @@ public class Game {
 
             if((row+1 < noOfRows) && (column-1 >= 0)) {
                 gameOver = cellClickedEvent(currentActivity, cells, contentOfCells, statusOfCells, grid,
-                        noOfRows, noOfColumns,lives, row+1, column-1);
+                        noOfRows, noOfColumns, noOfMines, lives, row+1, column-1);
                 if(gameOver) {
                     return gameOver;
                 }
@@ -125,7 +125,7 @@ public class Game {
 
             if(row+1 < noOfRows) {
                 gameOver = cellClickedEvent(currentActivity, cells, contentOfCells, statusOfCells, grid,
-                        noOfRows, noOfColumns,lives, row+1, column);
+                        noOfRows, noOfColumns, noOfMines, lives, row+1, column);
                 if(gameOver) {
                     return gameOver;
                 }
@@ -133,7 +133,7 @@ public class Game {
 
             if((row+1 < noOfRows) && (column+1 < noOfColumns)) {
                 gameOver = cellClickedEvent(currentActivity, cells, contentOfCells, statusOfCells, grid,
-                        noOfRows, noOfColumns,lives, row+1, column+1);
+                        noOfRows, noOfColumns, noOfMines, lives, row+1, column+1);
                 if(gameOver) {
                     return gameOver;
                 }
@@ -141,19 +141,19 @@ public class Game {
 
         }
 
-        return allCellsUncovered(grid);
+        return allCellsUncovered(grid, noOfMines);
 
     }
 
     public boolean mineCellClickedEvent(Activity currentActivity, Button[][] cells, ContentOfCell[][] contentOfCells, StatusOfCell[][] statusOfCells,
-                                        Grid grid, int noOfRows, int noOfColumns, Lives lives, int row, int column) {
+                                        Grid grid, int noOfRows, int noOfColumns, int noOfMines, Lives lives, int row, int column) {
 
         cells[row][column].setText("M");
 
         lives.countLives = lives.countLives - 1;
         statusOfCells[row][column] = StatusOfCell.UNCOVERED;
-        grid.noOfCoveredCells = grid.noOfCoveredCells + 1;
-        grid.noOfUncoveredCells = grid.noOfUncoveredCells + 1;
+        grid.noOfCoveredCells--;
+        grid.noOfUncoveredCells++;
 
         if(lives.countLives == 0) {
             Loss loss = new Loss();
@@ -161,28 +161,28 @@ public class Game {
             return false;
         }
         else {
-            return allCellsUncovered(grid);
+            return allCellsUncovered(grid, noOfMines);
         }
 
     }
 
     public boolean flaggedCellClickedEvent(Activity currentActivity, Button[][] cells, ContentOfCell[][] contentOfCells, StatusOfCell[][] statusOfCells,
-                                           Grid grid, int noOfRows, int noOfColumns, Lives lives, int row, int column) {
+                                           Grid grid, int noOfRows, int noOfColumns, int noOfMines, Lives lives, int row, int column) {
 
         cells[row][column].setText("F");
 
         lives.countLives = lives.countLives + 1;
         statusOfCells[row][column] = StatusOfCell.UNCOVERED;
-        grid.noOfCoveredCells = grid.noOfCoveredCells + 1;
-        grid.noOfUncoveredCells = grid.noOfUncoveredCells + 1;
+        grid.noOfCoveredCells--;
+        grid.noOfUncoveredCells++;
 
-        return allCellsUncovered(grid);
+        return allCellsUncovered(grid, noOfMines);
 
     }
 
-    public boolean allCellsUncovered(Grid grid) {
+    public boolean allCellsUncovered(Grid grid, int noOfMines) {
 
-        if(grid.noOfCoveredCells == 0) {
+        if(grid.noOfCoveredCells <= noOfMines) {
             return true;
         }
         else {
@@ -192,7 +192,7 @@ public class Game {
     }
 
     private int noOfNeighbouringMines(Button[][] cells, ContentOfCell[][] contentOfCells, StatusOfCell[][] statusOfCells,
-                                      Grid grid, int noOfRows, int noOfColumns, Lives lives, int row, int column) {
+                                      Grid grid, int noOfRows, int noOfColumns, int noOfMines, Lives lives, int row, int column) {
 
         int neighbours = 0;
 

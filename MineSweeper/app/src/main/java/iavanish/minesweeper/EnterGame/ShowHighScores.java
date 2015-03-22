@@ -1,40 +1,64 @@
+
 package iavanish.minesweeper.EnterGame;
 
-import android.support.v7.app.ActionBarActivity;
-import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
 
+import iavanish.minesweeper.CommonClasses.Player;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import iavanish.minesweeper.CommonClasses.DataBaseRead;
 import iavanish.minesweeper.R;
 
-public class ShowHighScores extends ActionBarActivity {
+import java.util.*;
+
+
+/**
+ * Displays the ScoreBoard
+ */
+
+/**
+ * Created by iavanish on 22-Mar-15.
+ */
+
+
+public class ShowHighScores extends Activity {
+
+    private LinearLayout showHighScores;
+
+    private DataBaseRead dataBaseRead;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_high_scores);
+
+        showHighScores = (LinearLayout) findViewById(R.id.showHighScores);
+        dataBaseRead = new DataBaseRead(this);
+        displayHighScores();
+
     }
 
+    private void displayHighScores() {
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_show_high_scores, menu);
-        return true;
-    }
+        ArrayList <Player> existingPlayers = dataBaseRead.getPlayersFromDataBase();
+        Iterator <Player> iterator = existingPlayers.iterator();
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+        TextView heading = new TextView(this);
+        heading.setText("Name" + "\t" + "Score" + "\t" + "Level");
+        showHighScores.addView(heading);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
+        while(iterator.hasNext()) {
+            Player player = iterator.next();
+            TextView displayPlayer = new TextView(this);
+            String data = player.nameOfPlayer + "\t" + player.scoreOfPlayer + "\t" + player.levelOfPlayer;
+            displayPlayer.setText(data);
+            showHighScores.addView(displayPlayer);
         }
 
-        return super.onOptionsItemSelected(item);
     }
+
 }
