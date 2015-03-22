@@ -25,8 +25,11 @@ public class EndGame {
 
     protected void enterNewGame(Activity currentActivity) {
 
-        for(int i = 0; i < 2000000; i++) {
-            Math.random();  //  wait
+        try {
+            Thread.sleep(1000);
+        }
+        catch(InterruptedException e) {
+
         }
 
         Intent intent = new Intent(currentActivity, EnterGame.class);

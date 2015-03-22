@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.widget.Toast;
 
 import iavanish.minesweeper.EndGame.Loss;
+import iavanish.minesweeper.R;
 
 
 /**
@@ -155,7 +156,7 @@ public class Game {
     public boolean mineCellClickedEvent(Activity currentActivity, Button[][] cells, ContentOfCell[][] contentOfCells, StatusOfCell[][] statusOfCells,
                                         Grid grid, int noOfRows, int noOfColumns, int noOfMines, Lives lives, int row, int column) {
 
-        cells[row][column].setText("M");
+        cells[row][column].setBackgroundResource(R.drawable.mine);
 
         lives.countLives = lives.countLives - 1;
         statusOfCells[row][column] = StatusOfCell.UNCOVERED;
@@ -187,7 +188,7 @@ public class Game {
     public boolean flaggedCellClickedEvent(Activity currentActivity, Button[][] cells, ContentOfCell[][] contentOfCells, StatusOfCell[][] statusOfCells,
                                            Grid grid, int noOfRows, int noOfColumns, int noOfMines, Lives lives, int row, int column) {
 
-        cells[row][column].setText("F");
+        cells[row][column].setBackgroundResource(R.drawable.flag);
 
         lives.countLives = lives.countLives + 1;
         statusOfCells[row][column] = StatusOfCell.UNCOVERED;
@@ -221,10 +222,10 @@ public class Game {
                 if(statusOfCells[i][j] == StatusOfCell.COVERED) {
                     statusOfCells[i][j] = StatusOfCell.UNCOVERED;
                     if(contentOfCells[i][j] == ContentOfCell.FLAG) {
-                        cells[i][j].setText("F");
+                        cells[i][j].setBackgroundResource(R.drawable.flag);
                     }
                     else if(contentOfCells[i][j] == ContentOfCell.MINE) {
-                        cells[i][j].setText("M");
+                        cells[i][j].setBackgroundResource(R.drawable.mine);
                     }
                     else if(contentOfCells[i][j] == ContentOfCell.NOTHING) {
                         //cells[i][j].setText("N");

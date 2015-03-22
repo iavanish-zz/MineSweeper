@@ -41,12 +41,6 @@ public class EnterGame extends Activity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_game);
 
-        MediaPlayer mMediaPlayer;
-        mMediaPlayer = MediaPlayer.create(this, R.mipmap.soft1);
-        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-        mMediaPlayer.setLooping(true);
-        mMediaPlayer.start();
-
         chooseExistingPlayerToStartTheGame = (Button) findViewById(R.id.chooseExistingPlayerToStartTheGame);
         enterNewPlayerToStartTheGame = (Button) findViewById(R.id.enterNewPlayerToStartTheGame);
         showHighScores = (Button) findViewById(R.id.showHighScores);

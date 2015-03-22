@@ -89,7 +89,7 @@ public class Level1Game extends Activity implements OnClickListener {
         setContentView(R.layout.activity_level1_game);
 
         MediaPlayer mMediaPlayer;
-        mMediaPlayer = MediaPlayer.create(this, R.mipmap.soft2);
+        mMediaPlayer = MediaPlayer.create(this, R.mipmap.soft);
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mMediaPlayer.setLooping(true);
         mMediaPlayer.start();

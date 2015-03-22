@@ -89,7 +89,7 @@ public class Level2Game extends Activity implements OnClickListener {
         setContentView(R.layout.activity_level1_game);
 
         MediaPlayer mMediaPlayer;
-        mMediaPlayer = MediaPlayer.create(this, R.mipmap.soft2);
+        mMediaPlayer = MediaPlayer.create(this, R.mipmap.soft);
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mMediaPlayer.setLooping(true);
         mMediaPlayer.start();
@@ -173,8 +173,6 @@ public class Level2Game extends Activity implements OnClickListener {
         if(score.score >= 120) {
 
             Toast.makeText(this, "TIME OVER. YOU LOST", Toast.LENGTH_LONG).show();
-
-
 
             Loss loss = new Loss();
             loss.enterNewGame(this);
