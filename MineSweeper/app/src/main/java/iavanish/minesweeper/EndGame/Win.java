@@ -25,7 +25,7 @@ public class Win extends EndGame {
 
     public void updateScore(Activity currentActivity, String playerName, Score score) {
         DataBaseWrite dataBaseWrite = new DataBaseWrite(currentActivity);
-        dataBaseWrite.updateScore(playerName, score.score, 40);
+        dataBaseWrite.updateScore(playerName, score.score, 50);
     }
 
     public void enterNewGame(Activity currentActivity) {

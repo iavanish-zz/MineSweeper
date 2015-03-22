@@ -58,35 +58,26 @@ public class Level1Game extends Activity implements OnClickListener {
     private StartNewGame newGame;
     private Game game;
 
-    long startTime = 0;
+    private long startTime = 0;
+    private int seconds = 0;
 
     Handler timerHandler = new Handler();
     Runnable timerRunnable = new Runnable() {
 
         @Override
         public void run() {
+
             long millis = System.currentTimeMillis() - startTime;
-            int seconds = (int) (millis / 1000);
+            seconds = (int) (millis / 1000);
 
             timer.setText(String.format("%02d", seconds));
 
             score.score = seconds;
 
-            if(seconds > 60) {
-
-                Level1Game leaveGame = new Level1Game();
-                Toast.makeText(leaveGame, "TIME OVER. YOU LOST", Toast.LENGTH_LONG).show();
-
-                for (int i = 0; i < 2000000; i++) {
-                    Math.random();  //  wait
-                }
-
-                Loss loss = new Loss();
-                loss.enterNewGame(leaveGame);
-
-            }
+            scoreTracker.setText(String.format("%02d", score.score));
 
             timerHandler.postDelayed(this, 500);
+
         }
 
     };
@@ -98,7 +89,7 @@ public class Level1Game extends Activity implements OnClickListener {
         setContentView(R.layout.activity_level1_game);
 
         MediaPlayer mMediaPlayer;
-        mMediaPlayer = MediaPlayer.create(this, R.mipmap.gun);
+        mMediaPlayer = MediaPlayer.create(this, R.mipmap.soft2);
         mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mMediaPlayer.setLooping(true);
         mMediaPlayer.start();
@@ -141,6 +132,8 @@ public class Level1Game extends Activity implements OnClickListener {
     @Override
     public void onClick(View v) {
 
+        timeOut();
+
         if (v.getId() == R.id.start) {
             Intent intent = new Intent(this, Level1Game.class);
             intent.putExtra("name", playerName);
@@ -162,10 +155,6 @@ public class Level1Game extends Activity implements OnClickListener {
                 if (gameOver) {
                     Toast.makeText(this, "YOU WON", Toast.LENGTH_LONG).show();
 
-                    for (int i = 0; i < 2000000; i++) {
-                        Math.random();  //  wait
-                    }
-
 
                     Win win = new Win();
                     win.updateScore(this, playerName, score);
@@ -173,6 +162,20 @@ public class Level1Game extends Activity implements OnClickListener {
                 }
 
             }
+
+        }
+
+    }
+
+    public void timeOut() {
+
+        if(score.score >= 60) {
+
+            Toast.makeText(this, "TIME OVER. YOU LOST", Toast.LENGTH_LONG).show();
+
+
+            Loss loss = new Loss();
+            loss.enterNewGame(this);
 
         }
 

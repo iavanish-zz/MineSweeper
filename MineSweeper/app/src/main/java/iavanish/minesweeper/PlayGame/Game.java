@@ -169,9 +169,7 @@ public class Game {
             revealAllMines(currentActivity, cells, contentOfCells, statusOfCells, grid,
                     noOfRows, noOfColumns, noOfMines, lives, row, column);
 
-            for(int i = 0; i < 2000000; i++) {
-                Math.random();  //  wait
-            }
+
 
             Loss loss = new Loss();
             loss.enterNewGame(currentActivity);
@@ -229,7 +227,7 @@ public class Game {
                         cells[i][j].setText("M");
                     }
                     else if(contentOfCells[i][j] == ContentOfCell.NOTHING) {
-                        cells[i][j].setText("N");
+                        //cells[i][j].setText("N");
                     }
                     else {
 

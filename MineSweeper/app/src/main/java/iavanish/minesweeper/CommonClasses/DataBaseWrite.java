@@ -5,7 +5,15 @@ package iavanish.minesweeper.CommonClasses;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.widget.Button;
+import android.widget.TableRow;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import iavanish.minesweeper.PlayGame.Score;
 
 
 /**
@@ -44,8 +52,8 @@ public class DataBaseWrite extends DataBaseRead {
         else {
             ContentValues values = new ContentValues();
             values.put("Name", userName);
-            values.put("Score", 200);
-            values.put("Level", 1);
+            values.put("Score", "1000");
+            values.put("Level", "1");
 
             mineSweeper.insert("Player", null, values);
 
@@ -69,16 +77,37 @@ public class DataBaseWrite extends DataBaseRead {
 
         ContentValues values = new ContentValues();
         values.put("Name", userName);
-        values.put("Score", score);
+        values.put("Score", String.valueOf(score));
 
-        if(score < threshold) {
-            values.put("Level", 1);
+        if(score <= threshold) {
+            values.put("Level", "2");
         }
         else {
-            values.put("Level", 2);
+            values.put("Level", "1");
         }
 
-        mineSweeper.update("Player", values, "Name = ?", whereClauseArgument);
+        int intScore = 1000;
+
+        ArrayList<Player> existingPlayers = getPlayersFromDataBase();
+        Iterator <Player> iterator = existingPlayers.iterator();
+
+        while(iterator.hasNext()) {
+            Player player = iterator.next();
+            if(player.nameOfPlayer.equalsIgnoreCase(userName)) {
+                intScore = player.scoreOfPlayer.score;
+                break;
+            }
+            else {
+
+            }
+        }
+
+        if(intScore > score) {
+            mineSweeper.update("Player", values, "Name = ?", whereClauseArgument);
+        }
+        else {
+
+        }
 
     }
 

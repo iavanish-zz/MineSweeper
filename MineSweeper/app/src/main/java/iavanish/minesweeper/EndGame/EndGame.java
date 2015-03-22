@@ -25,6 +25,10 @@ public class EndGame {
 
     protected void enterNewGame(Activity currentActivity) {
 
+        for(int i = 0; i < 2000000; i++) {
+            Math.random();  //  wait
+        }
+
         Intent intent = new Intent(currentActivity, EnterGame.class);
         currentActivity.startActivity(intent);
 

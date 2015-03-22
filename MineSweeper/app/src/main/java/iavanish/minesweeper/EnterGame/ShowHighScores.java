@@ -64,7 +64,7 @@ public class ShowHighScores extends Activity {
             level = new Button(this);
             name.setText(player.nameOfPlayer);
             score.setText(String.valueOf(player.scoreOfPlayer.score));
-            level.setText(String.valueOf(player.levelOfPlayer.ordinal()));
+            level.setText(String.valueOf(player.levelOfPlayer.ordinal() + 1));
             tableRow.addView(name);
             tableRow.addView(score);
             tableRow.addView(level);

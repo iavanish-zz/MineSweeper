@@ -50,13 +50,14 @@ public class SelectLevelOfGameToPlay extends Activity implements OnClickListener
         Intent intent = getIntent();
         String name = intent.getStringExtra("name");
         int score = intent.getIntExtra("score", Integer.MAX_VALUE);
-        int intLevel = intent.getIntExtra("level", 0);
+        int intLevel = intent.getIntExtra("level", 1);
         Level level;
         if(intLevel == 0) {
             level = Level.LEVEL_1;
         }
         else {
             level = Level.LEVEL_2;
+            level2.setVisibility(View.VISIBLE);
         }
         player = new Player(name, new Score(score), level);
 

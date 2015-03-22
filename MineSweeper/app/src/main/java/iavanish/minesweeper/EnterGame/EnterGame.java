@@ -3,6 +3,8 @@ package iavanish.minesweeper.EnterGame;
 
 
 import android.app.Activity;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -38,6 +40,12 @@ public class EnterGame extends Activity implements OnClickListener {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_enter_game);
+
+        MediaPlayer mMediaPlayer;
+        mMediaPlayer = MediaPlayer.create(this, R.mipmap.soft1);
+        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mMediaPlayer.setLooping(true);
+        mMediaPlayer.start();
 
         chooseExistingPlayerToStartTheGame = (Button) findViewById(R.id.chooseExistingPlayerToStartTheGame);
         enterNewPlayerToStartTheGame = (Button) findViewById(R.id.enterNewPlayerToStartTheGame);
