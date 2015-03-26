@@ -132,6 +132,14 @@ public class Level2Game extends Activity implements OnClickListener {
     @Override
     public void onClick(View v) {
 
+
+        MediaPlayer mMediaPlayer;
+        mMediaPlayer = MediaPlayer.create(this, R.mipmap.soft);
+        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mMediaPlayer.setLooping(true);
+        mMediaPlayer.start();
+
+
         timeOut();
 
         if (v.getId() == R.id.start) {
@@ -169,6 +177,14 @@ public class Level2Game extends Activity implements OnClickListener {
     }
 
     public void timeOut() {
+
+
+        MediaPlayer mMediaPlayer;
+        mMediaPlayer = MediaPlayer.create(this, R.mipmap.soft);
+        mMediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mMediaPlayer.setLooping(true);
+        mMediaPlayer.start();
+
 
         if(score.score >= 120) {
 
